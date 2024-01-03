@@ -1,0 +1,160 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.p-4 {
+  padding: 0rem !important
+}
+
+.ocean-img-container {
+    display: table;
+    margin-left: 78%;
+
+}
+
+.ocean-img {
+    height: 50px;
+    width: 40px;
+    padding: 3%;
+    margin-bottom: 20%;
+    opacity: 0.5;
+}
+
+.logo-title-container {
+  text-align: center;
+}
+
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('Franklin Gothic Demi Cond Regular.ttf') format('truetype');
+}
+
+h1.engine-title {
+  color: rgb(0, 122, 255);
+  margin: auto;
+  font-family: 'MyWebFont';
+  margin-top: 0.5%;
+  font-size: 40px;
+}
+
+.image-container {
+  position: absolute;
+  left: 2%;
+  top: 2%;
+  width: 50px;
+}
+
+.page-container {
+  display: grid;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 10px;
+  position: absolute;
+  top: 10%;
+  right: 1%;
+  bottom: 1%;
+  left: 1%;
+  }
+
+.typewriter-container {
+  position: static;
+  margin-left: 15vw;
+  margin-right: 15vw;
+  margin-top: 2%;
+  justify-content: center;
+}
+
+.typewriter {
+  text-align: justify;
+  font-family: 'Poppins', sans-serif;
+  color: rgb(94, 94, 94);
+}
+
+.title-datasets{
+  text-align: center;
+  margin: auto;
+  margin-top: 3%;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+}
+
+.datasets-cards-container{
+    display: flex;
+    margin: auto;
+    margin-top: 2%;
+}
+
+
+.row {
+  justify-content: center;
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 1%;
+  padding-right: 15%;
+  padding-left: 15%;
+}
+
+.card-object {
+  min-width: 400px;
+  max-width: 400px;
+}
+
+@keyframes delayedFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  /* Set initial opacity to 0 */
+  animation: delayedFadeIn 2s ease-in-out forwards;
+  /* Adjust the animation duration as needed */
+  animation-delay: 0.2s;
+  /* Adjust the delay (in seconds) as needed */
+}
+
+.title-dataset-link {
+  color: rgba(0, 123, 255, 0.555);
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px;
+  padding: 2%;
+}
+
+.title-dataset-link:hover {
+  color: rgb(0, 123, 255);
+}
+
+.button-container {
+  margin: auto;
+  align-items: center;
+  display: grid;
+  width: 165px;
+}
+
+button {
+  background-color:rgb(0, 123, 255)!important;
+  content: "\1F60D";
+}
+
+button:hover {
+  background-color: rgba(255, 172, 5, 1.00)!important;
+}
+
+.btn {
+  outline: none;
+  border: none;
+}
+
+.btn :hover{
+  outline: none;
+  border: none;
+}

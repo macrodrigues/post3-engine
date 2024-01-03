@@ -1,0 +1,111 @@
+@keyframes delayedFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  /* Set initial opacity to 0 */
+  animation: delayedFadeIn 2s ease-in-out forwards;
+  /* Adjust the animation duration as needed */
+  animation-delay: 0.2s;
+  /* Adjust the delay (in seconds) as needed */
+}
+
+
+.logo-title-container {
+  text-align: center;
+}
+
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('fonts/Franklin Gothic Demi Cond Regular.ttf') format('truetype');
+}
+
+h1.engine-title {
+  color: rgb(0, 122, 255);
+  margin: auto;
+  font-family: 'MyWebFont';
+  margin-top: 0.5%;
+  font-size: 40px;
+}
+
+.engine-word {
+  font-family: 'Gruppo', sans-serif;
+  font-style: italic;
+  font-size: smaller;
+  padding-left: 4px;
+  color: rgb(0, 122, 255);
+}
+
+.image-container {
+  position: absolute;
+  left: 2%;
+  top: 2%;
+}
+
+.img-style {
+  width: 3rem;
+}
+
+.three-title {
+  color: rgba(255, 172, 5, 1.00);
+  font-size: 45px;
+}
+
+.upload-container {
+  text-align: center;
+  margin-top: 3%;
+}
+
+.upload-specs {
+  width: 600px;
+  height: 80px;
+  line-height: 80px;
+  border-color: rgba(0, 0, 0, 0.316);
+  border-width: 1px;
+  border-style: dashed;
+  border-radius: 5px;
+  background-color: rgba(0, 123, 255, 0.039);
+  margin: auto;
+}
+
+.ocean-dataset-string {
+  font-weight: 600;
+}
+
+.title-models {
+    text-align: center;
+    margin: auto;
+    margin-top: 3%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.dropdown-models {
+  padding-top: 1%;
+  margin: auto;
+  width: 300px;
+}
+
+.collections-container {
+  display: flex;
+  margin: auto;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: 2%;
+}
+
+.chart-title {
+  text-align: center;
+  margin: auto;
+  font-family: 'MyWebFont';
+  font-size: 20px;
+}
