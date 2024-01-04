@@ -96,16 +96,47 @@ h1.engine-title {
 }
 
 .collections-container {
-  display: flex;
+  display: inline-block;
   margin: auto;
-  padding-left: 5%;
-  padding-right: 5%;
-  margin-top: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin-top: 3%;
 }
 
 .chart-title {
   text-align: center;
   margin: auto;
+  color: rgba(255, 172, 5, 1.00);
   font-family: 'MyWebFont';
   font-size: 20px;
+}
+
+.range-slider {
+  margin-top: 5%;
+  margin: auto;
+  width: 600px;
+}
+
+.rc-slider-mark-text {
+  font-size: 10px;
+  width: 60px;
+}
+
+.rc-slider {
+  margin-top: 5%;
+}
+
+.plot-container {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+.chart-container {
+  display: inline-block;
+  margin: auto;
+}
+
+.column {
+  width: 100%;
+  text-align: center;
 }

@@ -6,128 +6,26 @@ import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
 from dash import Dash, html, dcc
 from dash.dependencies import Input, Output
+from collections_n_revenue import gen_layout_col_rev
+from collections_n_revenue import gen_df_sort_collections, gen_df_sort_revenue
+from collections_n_revenue import create_collections_authors_figure
+from collections_n_revenue import create_collections_entries_figure
+from collections_n_revenue import create_revenue_authors_figure
+from collections_n_revenue import create_revenue_entries_figure
+
+
+# DUMMY DF
+df = pd.DataFrame()
 
 external_stylesheets = [
     "https://fonts.googleapis.com/css2?family=Bayon&family=Gruppo&family=Poppins:wght@300&display=swap",
     dbc.themes.BOOTSTRAP
 ]
 
-
 models = [
     "Collections and Revenue",
     "Textual Analysis"
 ]
-
-def create_collections_authors_figure(df):
-    df = df.head(10)
-    data = go.Bar(
-            x=df['collections'],
-            y=df['author'],
-            meta=df['revenue'],
-            hovertemplate="""<br>Author/Publication: %{y}
-            <br>Collections:%{x}
-            <br>Revenue:%{meta}
-            <extra></extra>""",
-            orientation='h',
-            marker=dict(
-                color=df['revenue'],  # Use 'Revenue' values as the color
-                colorscale='agsunset',  # Choose a color scale
-                cmin=df['revenue'].min(),
-                cmax=df['revenue'].max(),
-                colorbar=dict(
-                    title='Revenue')))
-
-    layout = go.Layout(
-                margin=dict(l=20, r=20, t=20, b=20),
-                bargap=0.1,
-                width=550,
-                height=400,
-                bargroupgap=0.1,
-                showlegend=False,  # table being used for legend
-                template='plotly_white',
-                yaxis=dict(
-                    title='Authors',
-                    title_standoff=40,
-                    showgrid=False,
-                    side='left'),
-                xaxis=dict(
-                    title='Collections',
-                    autorange=True,
-                    showgrid=False))
-
-    fig = go.Figure({'data': data, 'layout': layout})
-    fig.update_layout(yaxis={'categoryorder': 'total ascending'})
-    return fig
-
-
-def gen_df_grouped_author(df):
-    """ This function groups the dataframe by collections"""
-    df = df[['author', 'price', 'collections', 'revenue']]
-    df = df.groupby('author').sum().sort_values(
-        by=['collections'],
-        ascending=False)
-    df['revenue'] = round(df['revenue'], 4)
-    df.reset_index(inplace=True)
-    return df
-
-
-def gen_df_sort_collections(df):
-    """ Make dataframe sorted by collections"""
-    df = df.sort_values(by='collections', ascending=False)
-    df['revenue'] = round(df['revenue'], 4)
-    return df
-
-
-def gen_df_sort_revenue(df):
-    """ Make dataframe sorted by revenue"""
-    df = df.sort_values(by='revenue', ascending=False)
-    df['revenue'] = round(df['revenue'], 4)
-    return df
-
-
-# layout for collections and revenue
-def gen_layout_col_rev(df):
-    """ Generate Layout For the Collections and revenue Charts"""
-    layout = html.Div([
-                html.Div([
-                    html.Div([
-                        html.H1(
-                            'Collections by Authors/Publications',
-                            className="chart-title"
-                            ),
-                        dcc.Graph(
-                            id="graph-collections-authors",
-                            figure=create_collections_authors_figure(df))
-                    ], className="collections-authors-container"),
-                    html.Div([
-                        html.H1(
-                            'Collections by Entries',
-                            className="chart-title"
-                            ),
-                        dcc.Graph(
-                            id="graph-collections-entries",
-                            figure=create_collections_authors_figure(df))
-                    ], className="collections-authors-container"),
-                ], className='collections-container'),
-                html.Div([
-                    html.Div([
-                        html.H1('Revenue by Authors/Publications'),
-                        dcc.Graph(
-                            id="graph-revenue-authors",
-                            figure=create_collections_authors_figure(df)
-                            )
-                    ]),
-                    html.Div([
-                        html.H1('Revenue by Entries'),
-                        dcc.Graph(
-                            id="graph-revenue-entries",
-                            figure=create_collections_authors_figure(df)
-                            )
-                    ])
-                ], className='revenue-container')
-            ], className='fade-in')
-
-    return layout
 
 
 def dash_app_models(flask_app, path):
@@ -202,13 +100,40 @@ def dash_app_models(flask_app, path):
             content_type, content_string = uploaded_content.split(',')
             decoded = base64.b64decode(content_string)
             if 'csv' in uploaded_filename:
+                global df
                 df = pd.read_csv(io.StringIO(decoded.decode('utf-8')))
-                df_grouped_author = gen_df_grouped_author(df)
-                df_collected = gen_df_sort_collections(df)
-                df_revenue = gen_df_sort_revenue(df)
                 if selected_model == "Collections and Revenue":
-                    return gen_layout_col_rev(df_grouped_author)
+                    return gen_layout_col_rev(df)
                 if selected_model == "Textual Analysis":
                     return layout_textual
+
+
+    @app.callback(
+        [
+            Output('graph-collections-authors', 'figure'),
+            Output('graph-collections-entries', 'figure'),
+            Output('graph-revenue-authors', 'figure'),
+            Output('graph-revenue-entries', 'figure'),
+         ],
+        Input('slider-collections-authors', 'value')
+    )
+    def update_collections_authors_figure(selected_date_range):
+        global df
+        df_collected = gen_df_sort_collections(df)
+        df_revenue = gen_df_sort_revenue(df)
+        start = selected_date_range[0]
+        end = selected_date_range[-1]
+        dates = sorted(df['date'].unique())
+        dates = dates[start:end]
+        filt_df_collected = df_collected[
+            df_collected['date'].isin(dates)]
+        filt_df_revenue = df_revenue[
+            df_revenue['date'].isin(dates)]
+
+        return [
+            create_collections_authors_figure(filt_df_collected),
+            create_collections_entries_figure(filt_df_collected),
+            create_revenue_authors_figure(filt_df_revenue),
+            create_revenue_entries_figure(filt_df_revenue)]
 
     return app.server
