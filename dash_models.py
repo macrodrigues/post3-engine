@@ -11,7 +11,7 @@ from collections_n_revenue import gen_df_sort_collections, gen_df_sort_revenue
 from collections_n_revenue import create_collections_authors_figure
 from collections_n_revenue import create_collections_entries_figure
 from collections_n_revenue import create_revenue_authors_figure
-from collections_n_revenue import create_revenue_entries_figure
+from collections_n_revenue import create_revenue_entries_figure, gen_table
 
 
 # DUMMY DF
@@ -114,7 +114,9 @@ def dash_app_models(flask_app, path):
             Output('graph-collections-entries', 'figure'),
             Output('graph-revenue-authors', 'figure'),
             Output('graph-revenue-entries', 'figure'),
-         ],
+            Output('table-collections', 'children'),
+            Output('table-revenue', 'children')
+        ],
         Input('slider-collections-authors', 'value')
     )
     def update_collections_authors_figure(selected_date_range):
@@ -134,6 +136,9 @@ def dash_app_models(flask_app, path):
             create_collections_authors_figure(filt_df_collected),
             create_collections_entries_figure(filt_df_collected),
             create_revenue_authors_figure(filt_df_revenue),
-            create_revenue_entries_figure(filt_df_revenue)]
+            create_revenue_entries_figure(filt_df_revenue),
+            gen_table(filt_df_collected),
+            gen_table(filt_df_revenue)
+            ]
 
     return app.server

@@ -5,7 +5,6 @@ import pandas as pd
 import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
 from dash import Dash, html, dcc
-from dash.dependencies import Input, Output
 
 
 def gen_df_sort_collections(df):
@@ -210,6 +209,29 @@ def create_revenue_entries_figure(df):
     return fig
 
 
+def gen_table(df):
+    categories_dict = {
+        i+1: {'title': title, 'link': link}
+        for i, (title, link)
+        in enumerate(zip(
+            df.head(10).title.values, df.head(10).link.values))}
+
+    rows = []
+    for k, v in categories_dict.items():
+        row = html.Tr([
+            html.Td(
+                str(k) + ": ",
+                style={'color': 'rgba(255, 172, 5, 1.00)'}),
+            html.Td(html.A(v['title'], href=v['link'], target='_blank'))
+        ])
+        rows.append(row)
+
+    table_body = [
+        html.Tbody(rows, className='table-body')]
+
+    return table_body
+
+
 # layout for collections and revenue
 def gen_layout_col_rev(df):
     """ Generate Layout For the Collections and revenue Charts"""
@@ -238,18 +260,6 @@ def gen_layout_col_rev(df):
                     ], className="chart-container"),
                     html.Div([
                         html.H1(
-                            'Most Collected Articles',
-                            className="chart-title"
-                            ),
-                        dcc.Graph(
-                            id="graph-collections-entries",
-                            figure=create_collections_entries_figure(
-                                df_collected)),
-                    ], className="chart-container"),
-                ], className='collections-container'),
-                html.Div([
-                    html.Div([
-                        html.H1(
                             'Authors/Publications with the most revenue',
                             className="chart-title"),
                         dcc.Graph(
@@ -258,6 +268,24 @@ def gen_layout_col_rev(df):
                                 df_revenue)
                             )
                     ], className="chart-container"),
+                ], className='collections-container'),
+                html.Div([
+                    html.Div([
+                        html.H1(
+                            'Most Collected Articles',
+                            className="chart-title"
+                            ),
+                        dcc.Graph(
+                            id="graph-collections-entries",
+                            figure=create_collections_entries_figure(
+                                df_collected)),
+                    ], className="chart-container"),
+                    html.Table(
+                        gen_table(df_collected),
+                        id='table-collections',
+                    ),
+                ], className='collections-container'),
+                html.Div([
                     html.Div([
                         html.H1(
                             'Entries with the most Revenue',
@@ -267,7 +295,11 @@ def gen_layout_col_rev(df):
                             figure=create_revenue_entries_figure(
                                 df_revenue)
                             )
-                    ], className="chart-container")
+                    ], className="chart-container"),
+                    html.Table(
+                        gen_table(df_revenue),
+                        id='table-revenue',
+                    ),
                 ], className='collections-container')
             ], className='fade-in column')
 

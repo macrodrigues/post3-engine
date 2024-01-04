@@ -140,3 +140,14 @@ h1.engine-title {
   width: 100%;
   text-align: center;
 }
+
+table {
+  text-align: left;
+  margin-left: 20%!important;
+  margin-right: 10%!important;
+  margin-top: 2%!important;
+  margin-bottom: 2%!important;
+  color:rgb(0, 122, 255)!important;
+  font-weight: 600;
+  font-family: 'MyWebFont';
+}
