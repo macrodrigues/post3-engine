@@ -209,6 +209,36 @@ def create_revenue_entries_figure(df):
     return fig
 
 
+def create_pie_networks(df):
+    network_counts = df['network'].value_counts()
+    data = go.Pie(
+        labels=list(network_counts.index),
+        values=list(network_counts.values),
+        hovertemplate="""<br>Network: %{label}
+        <br>Count: %{value}
+        <br>Percentage: %{percent}
+        <extra></extra>
+        """
+    )
+
+    layout = go.Layout(
+        margin={'l': 20, 'r': 20, 't': 20, 'b': 20},
+        legend={'y': 0.5, 'x': 0.8},
+        legend_title_text='Networks')
+
+    colors_traces = [
+        '#007aff',
+        '#2e92ff',
+        '#5daaff',
+        '#8bc3ff',
+        '#b9dbff',
+        '#e8f3ff']
+
+    fig = go.Figure({'data': data, 'layout': layout})
+    fig.update_traces(marker={'colors': colors_traces})
+    return fig
+
+
 def gen_table(df):
     categories_dict = {
         i+1: {'title': title, 'link': link}
@@ -280,10 +310,12 @@ def gen_layout_col_rev(df):
                             figure=create_collections_entries_figure(
                                 df_collected)),
                     ], className="chart-container"),
-                    html.Table(
-                        gen_table(df_collected),
-                        id='table-collections',
-                    ),
+                    html.Div([
+                        html.Table(
+                            gen_table(df_collected),
+                            id='table-collections',
+                        ),
+                    ])
                 ], className='collections-container'),
                 html.Div([
                     html.Div([
@@ -296,11 +328,24 @@ def gen_layout_col_rev(df):
                                 df_revenue)
                             )
                     ], className="chart-container"),
-                    html.Table(
-                        gen_table(df_revenue),
-                        id='table-revenue',
-                    ),
-                ], className='collections-container')
+                    html.Div([
+                        html.Table(
+                            gen_table(df_revenue),
+                            id='table-revenue',
+                        ),
+                    ])
+                ], className='collections-container'),
+                html.Div([
+                    html.Div([
+                        html.H1(
+                            'Network Usage',
+                            className="chart-title"),
+                        dcc.Graph(
+                            id="graph-pie-networks",
+                            figure=create_pie_networks(df)
+                            )
+                    ]),
+                ], className="pie-chart-container")
             ], className='fade-in column')
 
     return layout

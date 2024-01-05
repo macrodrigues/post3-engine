@@ -108,7 +108,7 @@ h1.engine-title {
   margin: auto;
   color: rgba(255, 172, 5, 1.00);
   font-family: 'MyWebFont';
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .range-slider {
@@ -136,6 +136,10 @@ h1.engine-title {
   margin: auto;
 }
 
+.pie-chart-container {
+  margin-top: 5%;
+}
+
 .column {
   width: 100%;
   text-align: center;
@@ -143,11 +147,8 @@ h1.engine-title {
 
 table {
   text-align: left;
-  margin-left: 20%!important;
-  margin-right: 10%!important;
-  margin-top: 2%!important;
-  margin-bottom: 2%!important;
   color:rgb(0, 122, 255)!important;
-  font-weight: 600;
   font-family: 'MyWebFont';
+  display: inline-flex;
+  width: 600px;
 }
