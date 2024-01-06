@@ -1,28 +1,37 @@
-import os
+""" This script instantiates the route containin the models and dashboards """
+# pylint: disable=W0612
+# pylint: disable=W0603
+# pylint: disable=W0602
 import base64
 import io
+from datetime import datetime
 import pandas as pd
-import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
 from dash import Dash, html, dcc
 from dash.dependencies import Input, Output
-from collections_n_revenue import gen_layout_col_rev
-from collections_n_revenue import gen_df_sort_collections, gen_df_sort_revenue
-from collections_n_revenue import create_collections_authors_figure
-from collections_n_revenue import create_collections_entries_figure
-from collections_n_revenue import create_revenue_authors_figure
-from collections_n_revenue import create_revenue_entries_figure, gen_table
-from collections_n_revenue import create_pie_networks
+from models.collections_n_revenue import gen_layout_col_rev
+from models.collections_n_revenue import gen_df_sort_collections
+from models.collections_n_revenue import gen_df_sort_revenue
+from models.collections_n_revenue import create_collections_authors_figure
+from models.collections_n_revenue import create_collections_entries_figure
+from models.collections_n_revenue import create_revenue_authors_figure
+from models.collections_n_revenue import create_revenue_entries_figure
+from models.collections_n_revenue import gen_table
+from models.textual_analysis import gen_layout_textual
 
 
-# DUMMY DF
+# VARIABLES
 df = pd.DataFrame()
+year = datetime.today().year
+footer = f"Running in {year}. Built with ❤️ for Web3 enthusiasts."
 
 external_stylesheets = [
-    "https://fonts.googleapis.com/css2?family=Bayon&family=Gruppo&family=Poppins:wght@300&display=swap",
+    "https://fonts.googleapis.com"
+    "/css2?family=Bayon&family=Gruppo&family=Poppins:wght@300&display=swap",
     dbc.themes.BOOTSTRAP
 ]
 
+# list of available models
 models = [
     "Collections and Revenue",
     "Textual Analysis"
@@ -42,17 +51,13 @@ def dash_app_models(flask_app, path):
         external_stylesheets=external_stylesheets  # bootstrap components
     )
 
-    # layout for collections and revenue
-    layout_textual = html.Div([
-                        html.H1('come-me as flores')
-                    ], className='fade-in')
-
     app.layout = html.Div([
                     html.Div([
                         html.Div([
-                            html.Img(
-                                src='assets/post3_logo.png',
-                                className='img-style')
+                            html.A([
+                                html.Img(
+                                    src='assets/post3_logo.png',
+                                    className='img-style')], href='/')
                             ], className='image-container'),
                         html.H1([
                             'Post',
@@ -77,11 +82,15 @@ def dash_app_models(flask_app, path):
                         dcc.Dropdown(
                             id='models-dropdown',
                             options=models,
-                            value=models[0],
                             className="dropdown-models"
                         ),
                     ], className="upload-container"),
-                    html.Div(id='dynamic-layout')
+                    html.Div(id='dynamic-layout'),
+                    html.Div([
+                        html.Footer([
+                            html.P(footer)
+                        ])
+                    ], className="footer-section")
                 ], className='fade-in')
 
     @app.callback(
@@ -97,6 +106,8 @@ def dash_app_models(flask_app, path):
                 component_id='upload-dataset',
                 component_property='contents')])
     def upload_file(selected_model, uploaded_filename, uploaded_content):
+        """ This function renders a layout for the selected model. It takes the
+        model and the dataset as inputs."""
         if uploaded_filename is not None and uploaded_content is not None:
             content_type, content_string = uploaded_content.split(',')
             decoded = base64.b64decode(content_string)
@@ -106,8 +117,7 @@ def dash_app_models(flask_app, path):
                 if selected_model == "Collections and Revenue":
                     return gen_layout_col_rev(df)
                 if selected_model == "Textual Analysis":
-                    return layout_textual
-
+                    return gen_layout_textual(df)
 
     @app.callback(
         [
@@ -121,6 +131,8 @@ def dash_app_models(flask_app, path):
         Input('slider-collections-authors', 'value')
     )
     def update_collections_authors_figure(selected_date_range):
+        """ This function updates the charts and tables, by using a
+        Range Slider as input. """
         global df
         df_collected = gen_df_sort_collections(df)
         df_revenue = gen_df_sort_revenue(df)

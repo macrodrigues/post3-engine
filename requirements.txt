@@ -1,0 +1,9 @@
+dash
+pandas
+dash-bootstrap-components
+wordcloud
+langid
+neattext
+eth-account
+ocean-lib
+wheel

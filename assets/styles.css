@@ -147,8 +147,26 @@ h1.engine-title {
 
 table {
   text-align: left;
-  color:rgb(0, 122, 255)!important;
+  color:rgba(0, 123, 255, 0.212)!important;
   font-family: 'MyWebFont';
   display: inline-flex;
   width: 600px;
+}
+
+#wordcloud{
+  display: flex;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.footer-section {
+  position: absolute;
+  width: 100%;
+  /* Set your desired background color */
+  text-align: center;
+  margin-top: 5%;
+}
+
+p {
+  margin-bottom: 0.5rem;
 }

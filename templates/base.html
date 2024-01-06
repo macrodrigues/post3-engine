@@ -27,16 +27,21 @@
 		</style>
 	</head>
 	<body class="fade-in">
-        <div class="logo-title-container">
-          <div class="image-container">
-              <!-- Add your PNG image here -->
-              <img src="static/images/post3_logo.png" alt="Post3 Engine Logo">
-          </div>
-          <h1 class="engine-title">Post<span style="color: rgba(255, 172, 5, 1.00);font-size: 45px;">3</span> <span style="font-family: 'Gruppo', sans-serif; font-style: italic; font-size: smaller; color: rgb(0, 122, 255);">Engine</span></h1>
-        </div>
-        <div class="page-container">
-            {% block container %}
-            {% endblock %}
-        </div>
+    <div class="logo-title-container">
+      <div class="image-container">
+          <!-- Add your PNG image here -->
+          <img src="static/images/post3_logo.png" alt="Post3 Engine Logo">
+      </div>
+      <h1 class="engine-title">Post<span style="color: rgba(255, 172, 5, 1.00);font-size: 45px;">3</span> <span style="font-family: 'Gruppo', sans-serif; font-style: italic; font-size: smaller; color: rgb(0, 122, 255);">Engine</span></h1>
+    </div>
+    <div class="page-container">
+        {% block container %}
+        {% endblock %}
+    </div>
+    <div class="footer-section" >
+        <footer>
+          <p>Running in {{year}}. Built with &#129505 for Web3 enthusiasts.</p>
+        </footer>
+    </div>
 	</body>
 </html>
