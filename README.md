@@ -1,6 +1,8 @@
 # Post3 Engine
 
-![alt text](static/images/post3_logo.png)
+<p align="center">
+  <img src="static/images/post3_logo.png" width="200" height="200" alt="Post3 Logo">
+</p>
 
 [Post3](https://bento.me/post3) is a project that aims at exploring Writing NFTs from web3 Publishing Platforms like [Mirror](https://mirror.xyz/post3.eth) and [Paragraph](https://paragraph.xyz/@post3).
 
