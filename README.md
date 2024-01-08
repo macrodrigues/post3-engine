@@ -62,5 +62,5 @@ https://post3.xyz
 You can acquire a dataset in the [Ocean Market](https://market.oceanprotocol.com/profile/post3.eth) and upload it to the Post3 Engine to rapidly obtain insights about the dataset.
 
 <p align="center">
-  <img src="static/images/landing_page_post3.png" alt="Post3 Engine">
+  <img src="static/images/landing_page_post3_engine.png" alt="Post3 Engine">
 </p>

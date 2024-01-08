@@ -273,82 +273,84 @@ def gen_layout_col_rev(df):
     df_revenue = gen_df_sort_revenue(df)
 
     layout = html.Div([
-                dcc.RangeSlider(
-                    id='slider-collections-authors',
-                    marks=sorted(df['date'].unique()),
-                    step=1,
-                    value=[0, len(df['date'].unique())],
-                    className='range-slider'
-                ),
-                html.Div([
+                dcc.Loading([
+                    dcc.RangeSlider(
+                        id='slider-collections-authors',
+                        marks=sorted(df['date'].unique()),
+                        step=1,
+                        value=[0, len(df['date'].unique())],
+                        className='range-slider'
+                    ),
                     html.Div([
-                        html.H1(
-                            'Authors/Publications with the most Collections',
-                            className="chart-title"
+                        html.Div([
+                            html.H1(
+                                'Authors/Publications with the most Collections',
+                                className="chart-title"
+                                ),
+                            dcc.Graph(
+                                id="graph-collections-authors",
+                                figure=create_collections_authors_figure(
+                                    df_collected)),
+                        ], className="chart-container"),
+                        html.Div([
+                            html.H1(
+                                'Authors/Publications with the most revenue',
+                                className="chart-title"),
+                            dcc.Graph(
+                                id="graph-revenue-authors",
+                                figure=create_revenue_authors_figure(
+                                    df_revenue)
+                                )
+                        ], className="chart-container"),
+                    ], className='collections-container'),
+                    html.Div([
+                        html.Div([
+                            html.H1(
+                                'Most Collected Articles',
+                                className="chart-title"
+                                ),
+                            dcc.Graph(
+                                id="graph-collections-entries",
+                                figure=create_collections_entries_figure(
+                                    df_collected)),
+                        ], className="chart-container"),
+                        html.Div([
+                            html.Table(
+                                gen_table(df_collected),
+                                id='table-collections',
                             ),
-                        dcc.Graph(
-                            id="graph-collections-authors",
-                            figure=create_collections_authors_figure(
-                                df_collected)),
-                    ], className="chart-container"),
+                        ])
+                    ], className='collections-container'),
                     html.Div([
-                        html.H1(
-                            'Authors/Publications with the most revenue',
-                            className="chart-title"),
-                        dcc.Graph(
-                            id="graph-revenue-authors",
-                            figure=create_revenue_authors_figure(
-                                df_revenue)
-                            )
-                    ], className="chart-container"),
-                ], className='collections-container'),
-                html.Div([
-                    html.Div([
-                        html.H1(
-                            'Most Collected Articles',
-                            className="chart-title"
+                        html.Div([
+                            html.H1(
+                                'Entries with the most Revenue',
+                                className="chart-title"),
+                            dcc.Graph(
+                                id="graph-revenue-entries",
+                                figure=create_revenue_entries_figure(
+                                    df_revenue)
+                                )
+                        ], className="chart-container"),
+                        html.Div([
+                            html.Table(
+                                gen_table(df_revenue),
+                                id='table-revenue',
                             ),
-                        dcc.Graph(
-                            id="graph-collections-entries",
-                            figure=create_collections_entries_figure(
-                                df_collected)),
-                    ], className="chart-container"),
+                        ])
+                    ], className='collections-container'),
                     html.Div([
-                        html.Table(
-                            gen_table(df_collected),
-                            id='table-collections',
-                        ),
-                    ])
-                ], className='collections-container'),
-                html.Div([
-                    html.Div([
-                        html.H1(
-                            'Entries with the most Revenue',
-                            className="chart-title"),
-                        dcc.Graph(
-                            id="graph-revenue-entries",
-                            figure=create_revenue_entries_figure(
-                                df_revenue)
-                            )
-                    ], className="chart-container"),
-                    html.Div([
-                        html.Table(
-                            gen_table(df_revenue),
-                            id='table-revenue',
-                        ),
-                    ])
-                ], className='collections-container'),
-                html.Div([
-                    html.Div([
-                        html.H1(
-                            'Network Usage',
-                            className="chart-title"),
-                        dcc.Graph(
-                            id="graph-pie-networks",
-                            figure=create_pie_networks(df)
-                            )
-                    ]),
-                ], className="pie-chart-container")
+                        html.Div([
+                            html.H1(
+                                'Network Usage',
+                                className="chart-title"),
+                            dcc.Graph(
+                                id="graph-pie-networks",
+                                figure=create_pie_networks(df)
+                                )
+                        ]),
+                    ], className="pie-chart-container")
+                ], id="loading-sub-layout", type="circle")
             ], className='fade-in column')
 
     return layout

@@ -166,50 +166,52 @@ def gen_layout_textual(df):
     df['lang'] = df['description'].apply(detect_language)
 
     layout = html.Div([
-                html.Div([
+                dcc.Loading([
                     html.Div([
-                        html.H1(
-                            'Languages Present in the Articles',
-                            className="chart-title"
-                            ),
-                        dcc.Graph(
-                            id="graph-networks",
-                            figure=create_lang_bar_chart(df)),
-                    ], className="chart-container"),
-                ], className='collections-container'),
-                html.Div([
+                        html.Div([
+                            html.H1(
+                                'Languages Present in the Articles',
+                                className="chart-title"
+                                ),
+                            dcc.Graph(
+                                id="graph-networks",
+                                figure=create_lang_bar_chart(df)),
+                        ], className="chart-container"),
+                    ], className='collections-container'),
                     html.Div([
-                        html.H1(
-                            'Textual Lengths of the Articles',
-                            className="chart-title"
-                            ),
-                        dcc.Graph(
-                            id="graph-networks",
-                            figure=create_box_chart(df)),
-                    ], className="chart-container"),
-                ], className='collections-container'),
-                html.Div([
+                        html.Div([
+                            html.H1(
+                                'Textual Lengths of the Articles',
+                                className="chart-title"
+                                ),
+                            dcc.Graph(
+                                id="graph-networks",
+                                figure=create_box_chart(df)),
+                        ], className="chart-container"),
+                    ], className='collections-container'),
                     html.Div([
-                        html.H1(
-                            'Most Common Words in Titles',
-                            className="chart-title"
-                            ),
-                        html.Img(
-                            id="wordcloud",
-                            src=create_wordcloud_titles(df)),
-                    ], className="chart-container"),
-                ], className='collections-container'),
-                html.Div([
+                        html.Div([
+                            html.H1(
+                                'Most Common Words in Titles',
+                                className="chart-title"
+                                ),
+                            html.Img(
+                                id="wordcloud",
+                                src=create_wordcloud_titles(df)),
+                        ], className="chart-container"),
+                    ], className='collections-container'),
                     html.Div([
-                        html.H1(
-                            'Most Common Words in Descriptions',
-                            className="chart-title"
-                            ),
-                        html.Img(
-                            id="wordcloud",
-                            src=create_wordcloud_description(df)),
-                    ], className="chart-container"),
-                ], className='collections-container'),
+                        html.Div([
+                            html.H1(
+                                'Most Common Words in Descriptions',
+                                className="chart-title"
+                                ),
+                            html.Img(
+                                id="wordcloud",
+                                src=create_wordcloud_description(df)),
+                        ], className="chart-container"),
+                    ], className='collections-container'),
+                ], id="loading-sub-layout", type="default"),
             ], className='fade-in column')
 
     return layout
