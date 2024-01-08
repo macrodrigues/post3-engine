@@ -43,3 +43,24 @@ Let's take a look at the different functions in the **upload_utils.py** file:
 - **save_data():** this function saves some key parameters from the datatoken to a .csv file. This can be useful for further work, for instance to create a database of the assets that were submitted and/or acquired.
 
 In the **upload_dataset.py**, we basically use the functions already mentioned plus the **eth_account** library to call the publishing address. By running this script we upload the dataset to the Ocean Market.
+
+### Models
+
+In the Post3 Engine, we use the term 'models' to refer to the scripts that initiate the dashboards. At the moment there are two scripts available, the **collections_n_revenue.py** that displays bar charts regarding the number of collections and revenue, for either Authors/Publications or Articles. And the **textual_analysis.py** script, that launches word clouds and other charts to analyse textual content from the dataset.
+
+Other models are planned to be introduced in the future. Users will be able to buy premium models in the Ocean Market and launch them in the Post3 Engine, to gather extra information from Web3 articles.
+
+Models are created using Dash and Plotly for interactive visualization and seamless integration with HTML and CSS. Other charts such as word clouds are present.
+
+
+### Try out the platform
+
+The [Post3 Engine](https://post3.xyz) is available to test in the following website:
+
+https://post3.xyz
+
+You can acquire a dataset in the [Ocean Market](https://market.oceanprotocol.com/profile/post3.eth) and upload it to the Post3 Engine to rapidly obtain insights about the dataset.
+
+<p align="center">
+  <img src="static/images/landing_page_post3.png" alt="Post3 Engine">
+</p>
