@@ -37,11 +37,52 @@ h1.engine-title {
   font-size: 40px;
 }
 
+.number-three {
+  color: rgba(255, 172, 5, 1.00);
+  font-size: 45px;
+}
+
 .image-container {
   position: absolute;
   left: 2%;
   top: 2%;
   width: 50px;
+}
+
+.engine-style{
+  font-family: 'Gruppo', sans-serif;
+  font-style: italic;
+  font-size: smaller;
+  color: rgb(0, 122, 255);
+}
+
+@media only screen and (max-width: 600px) {
+  h1.engine-title {
+    font-size: 20px!important;
+    text-align: center;
+  }
+
+  .number-three {
+    font-size: 25px!important;
+  }
+
+  .card-object{
+    min-width: 220px!important;
+    max-width: 220px!important;
+  }
+
+  .title-datasets {
+    margin-top: 10%!important;
+    margin-bottom: 5%!important;
+  }
+
+  footer{
+    text-align: left!important;
+  }
+
+  .image-container {
+    width: 30px!important;
+  }
 }
 
 .page-container {

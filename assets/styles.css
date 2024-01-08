@@ -58,6 +58,36 @@ h1.engine-title {
   font-size: 45px;
 }
 
+@media only screen and (max-width: 600px) {
+  h1.engine-title {
+    font-size: 20px!important;
+    text-align: center;
+  }
+
+  .three-title {
+    font-size: 25px!important;
+  }
+
+  .title-datasets {
+    margin-top: 10% !important;
+    margin-bottom: 5% !important;
+  }
+
+  .upload-specs {
+    width: 200px!important;
+    line-height: 80px!important;
+    margin: auto;
+  }
+
+  footer {
+    text-align: left !important;
+  }
+
+  .image-container {
+    width: 30px!important;
+  }
+}
+
 .upload-container {
   text-align: center;
   margin-top: 3%;
