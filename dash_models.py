@@ -19,7 +19,6 @@ from models.collections_n_revenue import create_revenue_entries_figure
 from models.collections_n_revenue import gen_table
 from models.textual_analysis import gen_layout_textual
 
-
 # VARIABLES
 df = pd.DataFrame()
 year = datetime.today().year
