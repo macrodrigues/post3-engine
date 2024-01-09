@@ -50,6 +50,9 @@ def dash_app_models(flask_app, path):
         external_stylesheets=external_stylesheets  # bootstrap components
     )
 
+    app._favicon = "assets/favicon.ico"
+    app.title = 'Post3 Engine'
+
     app.layout = html.Div([
                     html.Div([
                         html.Div([

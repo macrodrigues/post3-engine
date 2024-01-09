@@ -56,14 +56,36 @@ h1.engine-title {
   color: rgb(0, 122, 255);
 }
 
+.typewriter-container {
+  position: static;
+  margin-left: 15vw;
+  margin-right: 15vw;
+  margin-top: 2%;
+  justify-content: center;
+}
+
+.typewriter {
+  text-align: justify;
+  font-family: 'Poppins', sans-serif;
+  color: rgb(94, 94, 94);
+}
+
 @media only screen and (max-width: 600px) {
   h1.engine-title {
-    font-size: 20px!important;
+    font-size: 25px!important;
     text-align: center;
   }
 
   .number-three {
-    font-size: 25px!important;
+    font-size: 30px!important;
+  }
+
+  .typewriter {
+    font-size: 15px!important;
+  }
+
+  .typewriter-container {
+    margin-top: 5%;
   }
 
   .card-object{
@@ -78,6 +100,9 @@ h1.engine-title {
 
   footer{
     text-align: left!important;
+    font-size: 15px;
+    margin-left: 5%;
+    margin-right: 5%;
   }
 
   .image-container {
@@ -95,20 +120,6 @@ h1.engine-title {
   bottom: 1%;
   left: 1%;
   }
-
-.typewriter-container {
-  position: static;
-  margin-left: 15vw;
-  margin-right: 15vw;
-  margin-top: 2%;
-  justify-content: center;
-}
-
-.typewriter {
-  text-align: justify;
-  font-family: 'Poppins', sans-serif;
-  color: rgb(94, 94, 94);
-}
 
 .title-datasets{
   text-align: center;

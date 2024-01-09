@@ -272,8 +272,8 @@ def gen_layout_col_rev(df):
     df_collected = gen_df_sort_collections(df)
     df_revenue = gen_df_sort_revenue(df)
 
-    layout = html.Div([
-                dcc.Loading([
+    layout = dcc.Loading([
+                html.Div([
                     dcc.RangeSlider(
                         id='slider-collections-authors',
                         marks=sorted(df['date'].unique()),
@@ -284,7 +284,8 @@ def gen_layout_col_rev(df):
                     html.Div([
                         html.Div([
                             html.H1(
-                                'Authors/Publications with the most Collections',
+                                'Authors/Publications'
+                                ' with the most Collections',
                                 className="chart-title"
                                 ),
                             dcc.Graph(
@@ -350,7 +351,7 @@ def gen_layout_col_rev(df):
                                 )
                         ]),
                     ], className="pie-chart-container")
-                ], id="loading-sub-layout", type="circle")
-            ], className='fade-in column')
+                ], className='fade-in column')
+            ], id="loading-sub-layout", type="circle")
 
     return layout

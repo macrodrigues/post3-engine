@@ -60,12 +60,12 @@ h1.engine-title {
 
 @media only screen and (max-width: 600px) {
   h1.engine-title {
-    font-size: 20px!important;
+    font-size: 25px!important;
     text-align: center;
   }
 
   .three-title {
-    font-size: 25px!important;
+    font-size: 30px!important;
   }
 
   .title-datasets {
@@ -77,10 +77,14 @@ h1.engine-title {
     width: 200px!important;
     line-height: 80px!important;
     margin: auto;
+    margin-top: 10%!important;
   }
 
   footer {
     text-align: left !important;
+    font-size: 15px!important;
+    margin-left: 5%!important;
+    margin-right: 5%!important;
   }
 
   .image-container {

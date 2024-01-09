@@ -165,8 +165,8 @@ def gen_layout_textual(df):
     df['description'] = df['description'].apply(clean_text)
     df['lang'] = df['description'].apply(detect_language)
 
-    layout = html.Div([
-                dcc.Loading([
+    layout = dcc.Loading([
+                html.Div([
                     html.Div([
                         html.Div([
                             html.H1(
@@ -211,7 +211,7 @@ def gen_layout_textual(df):
                                 src=create_wordcloud_description(df)),
                         ], className="chart-container"),
                     ], className='collections-container'),
-                ], id="loading-sub-layout", type="default"),
-            ], className='fade-in column')
+                ], className='fade-in column')
+            ], id="loading-sub-layout", type="circle"),
 
     return layout
