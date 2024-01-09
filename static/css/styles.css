@@ -6,6 +6,11 @@ body {
   padding: 0rem !important
 }
 
+.bg-white {
+  height: 180px;
+  width: 350px;
+}
+
 .ocean-img-container {
     display: table;
     margin-left: 78%;
