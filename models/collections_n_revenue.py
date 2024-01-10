@@ -295,7 +295,7 @@ def gen_layout_col_rev(df):
                         ], className="chart-container"),
                         html.Div([
                             html.H1(
-                                'Authors/Publications with the most revenue',
+                                'Authors/Publications with the most Revenue',
                                 className="chart-title"),
                             dcc.Graph(
                                 id="graph-revenue-authors",
@@ -325,7 +325,7 @@ def gen_layout_col_rev(df):
                     html.Div([
                         html.Div([
                             html.H1(
-                                'Entries with the most Revenue',
+                                'Articles with the most Revenue',
                                 className="chart-title"),
                             dcc.Graph(
                                 id="graph-revenue-entries",
