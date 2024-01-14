@@ -142,7 +142,7 @@ h1.engine-title {
   margin: auto;
   color: rgba(255, 172, 5, 1.00);
   font-family: 'MyWebFont';
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .range-slider {
@@ -203,4 +203,9 @@ table {
 
 p {
   margin-bottom: 0.5rem;
+}
+
+.loading-element {
+  display: inline-block;
+  margin-top: 5%;
 }

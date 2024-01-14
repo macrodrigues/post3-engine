@@ -90,6 +90,7 @@ def dash_app_models(flask_app, path):
                     dcc.Loading([
                         html.Div(id='dynamic-layout')],
                         id="loading-output",
+                        className='loading-element',
                         type="circle"
                     ),
                     html.Div([
