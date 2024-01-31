@@ -34,6 +34,83 @@ def detect_language(x):
 def create_lang_bar_chart(df):
     """creates a bar chart showing the languages used in
     the articles' dataset"""
+    languages = {
+        'en': 'English',
+        'zh': 'Chinese',
+        'es': 'Spanish',
+        'hi': 'Hindi',
+        'ar': 'Arabic',
+        'pt': 'Portuguese',
+        'bn': 'Bengali',
+        'ru': 'Russian',
+        'ja': 'Japanese',
+        'pa': 'Punjabi',
+        'ms': 'Malay',
+        'fr': 'French',
+        'de': 'German',
+        'ur': 'Urdu',
+        'te': 'Telugu',
+        'vi': 'Vietnamese',
+        'ko': 'Korean',
+        'it': 'Italian',
+        'ta': 'Tamil',
+        'tr': 'Turkish',
+        'th': 'Thai',
+        'gu': 'Gujarati',
+        'pl': 'Polish',
+        'uk': 'Ukrainian',
+        'ro': 'Romanian',
+        'nl': 'Dutch',
+        'mr': 'Marathi',
+        'el': 'Greek',
+        'hu': 'Hungarian',
+        'cs': 'Czech',
+        'sv': 'Swedish',
+        'he': 'Hebrew',
+        'fi': 'Finnish',
+        'da': 'Danish',
+        'ml': 'Malayalam',
+        'sk': 'Slovak',
+        'bg': 'Bulgarian',
+        'hr': 'Croatian',
+        'lt': 'Lithuanian',
+        'sl': 'Slovenian',
+        'et': 'Estonian',
+        'lv': 'Latvian',
+        'sq': 'Albanian',
+        'sr': 'Serbian',
+        'is': 'Icelandic',
+        'ga': 'Irish',
+        'mk': 'Macedonian',
+        'mt': 'Maltese',
+        'eu': 'Basque',
+        'bs': 'Bosnian',
+        'cy': 'Welsh',
+        'lb': 'Luxembourgish',
+        'mi': 'Maori',
+        'fy': 'Frisian',
+        'af': 'Afrikaans',
+        'zu': 'Zulu',
+        'so': 'Somali',
+        'sw': 'Swahili',
+        'ha': 'Hausa',
+        'yo': 'Yoruba',
+        'ig': 'Igbo',
+        'am': 'Amharic',
+        'az': 'Azerbaijani',
+        'ka': 'Georgian',
+        'hy': 'Armenian',
+        'km': 'Khmer',
+        'lo': 'Lao',
+        'mn': 'Mongolian',
+        'my': 'Burmese',
+        'si': 'Sinhala',
+        'fil': 'Filipino',
+        'ceb': 'Cebuano',
+        'haw': 'Hawaiian',
+    }
+
+    df['lang'] = df['lang'].map(languages)
     df = pd.DataFrame(df['lang'].value_counts())
     df = df.head(10)
 
@@ -50,11 +127,12 @@ def create_lang_bar_chart(df):
         '#f1f8ff']
 
     data = go.Bar(
-            x=df.index,
-            y=df['count'],
+            x=df['count'],
+            y=df.index,
             marker_color=colors_traces,
-            hovertemplate="""<br>Language: %{x}
-            <br>Counts: %{y}
+            orientation='h',
+            hovertemplate="""<br>Language: %{y}
+            <br>Number of Articles: %{x}
             <extra></extra>""")
 
     layout = go.Layout(
@@ -66,12 +144,12 @@ def create_lang_bar_chart(df):
                 showlegend=False,  # table being used for legend
                 template='plotly_white',
                 yaxis=dict(
-                    title='Counts',
+                    title='Languages',
                     title_standoff=40,
                     showgrid=False,
                     side='left'),
                 xaxis=dict(
-                    title='Language',
+                    title='Counts',
                     autorange=True,
                     showgrid=False))
 
@@ -84,6 +162,8 @@ def create_lang_bar_chart(df):
 def create_box_chart(df):
     """ Create a boxplot chart with the lengths of characters for body,
     title and descriptions"""
+
+    df['body'] = df['body'].astype(str)
     df['len_body'] = df['body'].apply(lambda x: len(x))
     df['len_title'] = df['title'].apply(lambda x: len(x))
     df['len_description'] = df['description'].apply(lambda x: len(x))
