@@ -19,6 +19,9 @@ def gen_df_sort_revenue(df):
 
 def create_collections_authors_figure(df):
     """ Create collections per authors/publications bar plot"""
+    revenue = 'ETH'
+    if 'price_usd' in df.columns:
+        revenue = 'USD'
     df = df.head(10)
     data = go.Bar(
             x=df['collections'],
@@ -36,7 +39,7 @@ def create_collections_authors_figure(df):
                 cmax=df['revenue'].max(),
                 colorbar=dict(
                     thickness=15,
-                    title='Revenue (ETH)')))
+                    title=f"Revenue ({revenue})")))
 
     layout = go.Layout(
                 margin=dict(l=20, r=20, t=20, b=20),
@@ -63,8 +66,10 @@ def create_collections_authors_figure(df):
 
 def create_collections_entries_figure(df):
     """ Create collections per entries bar plot"""
+    revenue = 'ETH'
+    if 'price_usd' in df.columns:
+        revenue = 'USD'
     df = df.head(10)
-
     short_labels = [
         title[:10] + '...' if len(title) > 10
         else title for title in df['title']]
@@ -85,7 +90,7 @@ def create_collections_entries_figure(df):
                 cmax=df['revenue'].max(),
                 colorbar=dict(
                     thickness=15,
-                    title='Revenue (ETH)')))
+                    title=f"Revenue ({revenue})")))
 
     layout = go.Layout(
                 margin=dict(l=20, r=20, t=20, b=20),
@@ -113,6 +118,9 @@ def create_collections_entries_figure(df):
 
 def create_revenue_authors_figure(df):
     """ Create revenue per authors/publications bar plot"""
+    revenue = 'ETH'
+    if 'price_usd' in df.columns:
+        revenue = 'USD'
     df = df.head(10)
     data = go.Bar(
             x=df['revenue'],
@@ -146,7 +154,7 @@ def create_revenue_authors_figure(df):
                     showgrid=False,
                     side='left'),
                 xaxis=dict(
-                    title='Revenue (ETH)',
+                    title=f"Revenue ({revenue})",
                     autorange=True,
                     showgrid=False))
 
@@ -157,6 +165,9 @@ def create_revenue_authors_figure(df):
 
 def create_revenue_entries_figure(df):
     """ Create revenue per entries bar plot"""
+    revenue = 'ETH'
+    if 'price_usd' in df.columns:
+        revenue = 'USD'
     df = df.head(10)
 
     short_labels = [
@@ -195,7 +206,7 @@ def create_revenue_entries_figure(df):
                     showgrid=False,
                     side='left'),
                 xaxis=dict(
-                    title='Revenue (ETH)',
+                    title=f"Revenue ({revenue})",
                     autorange=True,
                     showgrid=False))
 
