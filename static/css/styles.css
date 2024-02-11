@@ -103,6 +103,16 @@ h1.engine-title {
     margin-bottom: 5%!important;
   }
 
+  .title-dataset-link {
+    font-size: 20px!important;
+    width: 95%!important
+  }
+
+  .bg-white{
+    height: 150px!important;
+    width: 200px!important;
+  }
+
   footer{
     text-align: left!important;
     font-size: 15px;
