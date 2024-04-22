@@ -186,11 +186,10 @@ h1.engine-title {
 }
 
 table {
+  display: inline;
   text-align: left;
   color:rgba(0, 123, 255, 0.212)!important;
   font-family: 'MyWebFont';
-  display: inline-flex;
-  width: 600px;
 }
 
 #wordcloud{
@@ -219,5 +218,5 @@ p {
 
 #dynamic-layout {
   background-color: white;
-  margin: 10%;
+  margin: 5%;
 }

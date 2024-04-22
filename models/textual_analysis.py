@@ -212,7 +212,7 @@ def create_wordcloud_titles(df):
         collocations=False,
         background_color='rgba(255, 255, 255, 0)',
         colormap='Blues',
-        mode="RGBA", width=350, height=250).generate(
+        mode="RGBA", width=300, height=280).generate(
             " ".join(list(df.title.values)))
 
     return word_cloud.to_image()
@@ -229,7 +229,7 @@ def create_wordcloud_description(df):
         collocations=False,
         background_color='rgba(255, 255, 255, 0)',
         colormap='Blues',
-        mode="RGBA", width=350, height=250).generate(
+        mode="RGBA", width=300, height=280).generate(
             " ".join(list(df.description.values)))
 
     return word_cloud.to_image()
@@ -252,7 +252,10 @@ def gen_layout_textual(df):
                             dcc.Graph(
                                 id="graph-networks-languages",
                                 figure=create_lang_bar_chart(df),
-                                style={'width': '50vw', 'height': '70vh'})
+                                style={
+                                    'width': '80vw',
+                                    'height': '70vw',
+                                    'margin': 'auto'}),
                         ], className="chart-container"),
                     ], className='collections-container'),
                     html.Div([
@@ -264,7 +267,10 @@ def gen_layout_textual(df):
                             dcc.Graph(
                                 id="graph-networks-lengths",
                                 figure=create_box_chart(df),
-                                style={'width': '50vw', 'height': '70vh'})
+                                style={
+                                    'width': '80vw',
+                                    'height': '70vw',
+                                    'margin': 'auto'}),
                         ], className="chart-container"),
                     ], className='collections-container'),
                     html.Div([
