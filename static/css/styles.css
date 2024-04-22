@@ -118,6 +118,12 @@ b {
   .image-container {
     width: 30px!important;
   }
+
+  .gif-img {
+    margin: auto;
+    width: 60%;
+    height: 60%;
+  }
 }
 
 .page-container {
@@ -200,7 +206,6 @@ b {
 }
 
 .button-container {
-  width: 180px;
   padding: 1%;
 }
 
