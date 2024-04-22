@@ -72,13 +72,13 @@ def dash_app_models(flask_app, path):
                             id='upload-dataset',
                             className='upload-specs',
                             children=html.Div([
-                                'Submit the ',
+                                'Submit a ',
                                 html.Span(
-                                    children='Ocean Dataset',
-                                    className='ocean-dataset-string')])
+                                    children='dataset',
+                                    className='dataset-string')])
                         ),
                         html.H1(
-                            "Pick a Model",
+                            "Choose a Model",
                             className="title-models"
                         ),
                         dcc.Dropdown(
@@ -118,9 +118,9 @@ def dash_app_models(flask_app, path):
         if uploaded_filename is not None and uploaded_content is not None:
             content_type, content_string = uploaded_content.split(',')
             decoded = base64.b64decode(content_string)
-            if 'csv' in uploaded_filename:
+            if 'json' in uploaded_filename:
                 global df
-                df = pd.read_csv(io.StringIO(decoded.decode('utf-8')))
+                df = pd.read_json(io.StringIO(decoded.decode('utf-8')))
                 if selected_model == "Collections and Revenue":
                     return gen_layout_col_rev(df)
                 if selected_model == "Textual Analysis":

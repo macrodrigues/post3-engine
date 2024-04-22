@@ -17,6 +17,10 @@
   /* Adjust the delay (in seconds) as needed */
 }
 
+body{
+  background-color: rgb(0, 122, 255);
+}
+
 
 .logo-title-container {
   text-align: center;
@@ -28,7 +32,7 @@
 }
 
 h1.engine-title {
-  color: rgb(0, 122, 255);
+  color: rgb(255, 255, 255);
   margin: auto;
   font-family: 'MyWebFont';
   margin-top: 0.5%;
@@ -40,7 +44,7 @@ h1.engine-title {
   font-style: italic;
   font-size: smaller;
   padding-left: 4px;
-  color: rgb(0, 122, 255);
+  color: rgb(255, 255, 255);
 }
 
 .image-container {
@@ -98,18 +102,19 @@ h1.engine-title {
 }
 
 .upload-specs {
-  width: 600px;
+  color: rgba(255, 172, 5, 1.00);;
+  width: 400px;
   height: 80px;
   line-height: 80px;
-  border-color: rgba(0, 0, 0, 0.316);
-  border-width: 1px;
+  border-color: rgba(255, 172, 5, 1.00);
+  border-width: 2px;
   border-style: dashed;
   border-radius: 5px;
-  background-color: rgba(0, 123, 255, 0.039);
+  background-color: rgba(255, 172, 5, 0);
   margin: auto;
 }
 
-.ocean-dataset-string {
+.dataset-string {
   font-weight: 600;
 }
 
@@ -120,7 +125,7 @@ h1.engine-title {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 20px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .dropdown-models {
@@ -158,11 +163,6 @@ h1.engine-title {
 
 .rc-slider {
   margin-top: 5%;
-}
-
-.plot-container {
-  padding-left: 20px !important;
-  padding-right: 20px !important;
 }
 
 .chart-container {
@@ -203,9 +203,15 @@ table {
 
 p {
   margin-bottom: 0.5rem;
+  color: white;
 }
 
 .loading-element {
   display: inline-block;
   margin-top: 5%;
+}
+
+#dynamic-layout {
+  background-color: white;
+  margin: 10%;
 }
