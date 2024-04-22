@@ -161,9 +161,15 @@ h1.engine-title {
   width: 60px;
 }
 
+#slider-collections-authors {
+  width: 70vw;
+}
+
 .rc-slider {
   margin-top: 5%;
+
 }
+
 
 .chart-container {
   display: inline-block;

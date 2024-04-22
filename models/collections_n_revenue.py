@@ -44,8 +44,6 @@ def create_collections_authors_figure(df):
     layout = go.Layout(
                 margin=dict(l=20, r=20, t=20, b=20),
                 bargap=0.1,
-                width=550,
-                height=400,
                 bargroupgap=0.1,
                 showlegend=False,  # table being used for legend
                 template='plotly_white',
@@ -95,8 +93,6 @@ def create_collections_entries_figure(df):
     layout = go.Layout(
                 margin=dict(l=20, r=20, t=20, b=20),
                 bargap=0.1,
-                width=550,
-                height=400,
                 bargroupgap=0.1,
                 showlegend=False,  # table being used for legend
                 template='plotly_white',
@@ -143,8 +139,6 @@ def create_revenue_authors_figure(df):
     layout = go.Layout(
                 margin=dict(l=20, r=20, t=20, b=20),
                 bargap=0.1,
-                width=550,
-                height=400,
                 bargroupgap=0.1,
                 showlegend=False,  # table being used for legend
                 template='plotly_white',
@@ -195,8 +189,6 @@ def create_revenue_entries_figure(df):
     layout = go.Layout(
                 margin=dict(l=20, r=20, t=20, b=20),
                 bargap=0.1,
-                width=550,
-                height=400,
                 bargroupgap=0.1,
                 showlegend=False,  # table being used for legend
                 template='plotly_white',
@@ -290,7 +282,7 @@ def gen_layout_col_rev(df):
                         marks=sorted(df['date'].unique()),
                         step=1,
                         value=[0, len(df['date'].unique())],
-                        className='range-slider'
+                        className='range-slider',
                     ),
                     html.Div([
                         html.Div([
@@ -302,7 +294,8 @@ def gen_layout_col_rev(df):
                             dcc.Graph(
                                 id="graph-collections-authors",
                                 figure=create_collections_authors_figure(
-                                    df_collected)),
+                                    df_collected),
+                                style={'width': '50vw', 'height': '70vh'})
                         ], className="chart-container"),
                         html.Div([
                             html.H1(
@@ -311,8 +304,8 @@ def gen_layout_col_rev(df):
                             dcc.Graph(
                                 id="graph-revenue-authors",
                                 figure=create_revenue_authors_figure(
-                                    df_revenue)
-                                )
+                                    df_revenue),
+                                style={'width': '50vw', 'height': '70vh'})
                         ], className="chart-container"),
                     ], className='collections-container'),
                     html.Div([
@@ -324,13 +317,14 @@ def gen_layout_col_rev(df):
                             dcc.Graph(
                                 id="graph-collections-entries",
                                 figure=create_collections_entries_figure(
-                                    df_collected)),
+                                    df_collected),
+                                style={'width': '50vw', 'height': '70vh'})
                         ], className="chart-container"),
                         html.Div([
                             html.Table(
                                 gen_table(df_collected),
                                 id='table-collections',
-                            ),
+                                style={'width': '50vw', 'height': '70vh'}),
                         ])
                     ], className='collections-container'),
                     html.Div([
@@ -341,14 +335,14 @@ def gen_layout_col_rev(df):
                             dcc.Graph(
                                 id="graph-revenue-entries",
                                 figure=create_revenue_entries_figure(
-                                    df_revenue)
-                                )
+                                    df_revenue),
+                                style={'width': '50vw', 'height': '70vh'})
                         ], className="chart-container"),
                         html.Div([
                             html.Table(
                                 gen_table(df_revenue),
                                 id='table-revenue',
-                            ),
+                                style={'width': '50vw', 'height': '70vh'})
                         ])
                     ], className='collections-container'),
                     html.Div([

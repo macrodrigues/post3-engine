@@ -138,8 +138,6 @@ def create_lang_bar_chart(df):
     layout = go.Layout(
                 margin=dict(l=20, r=20, t=20, b=20),
                 bargap=0.1,
-                width=500,
-                height=400,
                 bargroupgap=0.1,
                 showlegend=False,  # table being used for legend
                 template='plotly_white',
@@ -190,8 +188,6 @@ def create_box_chart(df):
 
     layout = go.Layout(
                 margin=dict(l=20, r=20, t=20, b=20),
-                width=500,
-                height=400,
                 bargroupgap=0.1,
                 showlegend=False,  # table being used for legend
                 template='plotly_white',
@@ -216,7 +212,7 @@ def create_wordcloud_titles(df):
         collocations=False,
         background_color='rgba(255, 255, 255, 0)',
         colormap='Blues',
-        mode="RGBA", width=500, height=300).generate(
+        mode="RGBA", width=350, height=250).generate(
             " ".join(list(df.title.values)))
 
     return word_cloud.to_image()
@@ -233,7 +229,7 @@ def create_wordcloud_description(df):
         collocations=False,
         background_color='rgba(255, 255, 255, 0)',
         colormap='Blues',
-        mode="RGBA", width=500, height=300).generate(
+        mode="RGBA", width=350, height=250).generate(
             " ".join(list(df.description.values)))
 
     return word_cloud.to_image()
@@ -254,8 +250,9 @@ def gen_layout_textual(df):
                                 className="chart-title"
                                 ),
                             dcc.Graph(
-                                id="graph-networks",
-                                figure=create_lang_bar_chart(df)),
+                                id="graph-networks-languages",
+                                figure=create_lang_bar_chart(df),
+                                style={'width': '50vw', 'height': '70vh'})
                         ], className="chart-container"),
                     ], className='collections-container'),
                     html.Div([
@@ -265,8 +262,9 @@ def gen_layout_textual(df):
                                 className="chart-title"
                                 ),
                             dcc.Graph(
-                                id="graph-networks",
-                                figure=create_box_chart(df)),
+                                id="graph-networks-lengths",
+                                figure=create_box_chart(df),
+                                style={'width': '50vw', 'height': '70vh'})
                         ], className="chart-container"),
                     ], className='collections-container'),
                     html.Div([
