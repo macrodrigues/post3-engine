@@ -134,6 +134,14 @@ h1.engine-title {
   width: 300px;
 }
 
+.Select-control {
+  background-color: rgba(255, 255, 255, 0.187)!important;
+}
+
+#tags-dropdown-explorer .Select-control {
+  background-color: rgb(255, 255, 255) !important;
+}
+
 .collections-container {
   display: inline-block;
   margin: auto;
@@ -145,9 +153,18 @@ h1.engine-title {
 .chart-title {
   text-align: center;
   margin: auto;
-  color: rgba(255, 172, 5, 1.00);
+  color: rgb(255, 255, 255);
   font-family: 'MyWebFont';
-  font-size: 20px;
+  padding-top: 5%;
+  padding-bottom: 2%;
+  font-size: 3vw;
+}
+
+@media only screen and (max-width: 600px) {
+  .chart-title {
+    font-size: 20px;
+  }
+
 }
 
 .range-slider {
@@ -159,6 +176,7 @@ h1.engine-title {
 .rc-slider-mark-text {
   font-size: 10px;
   width: 60px;
+  color:white
 }
 
 #slider-collections-authors {
@@ -217,6 +235,6 @@ p {
 }
 
 #dynamic-layout {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
   margin: 5%;
 }

@@ -115,16 +115,16 @@ def create_lang_bar_chart(df):
     df = df.head(10)
 
     colors_traces = [
-        '#0073f1',
-        '#0e81ff',
-        '#2a90ff',
-        '#479fff',
-        '#63aeff',
-        '#80bcff',
-        '#9ccbff',
-        '#b8daff',
-        '#d4e9ff',
-        '#f1f8ff']
+        '#ffac05',
+        '#ffb41d',
+        '#ffbc36',
+        '#ffc450',
+        '#ffcd69',
+        '#ffd582',
+        '#ffdd9b',
+        '#ffe6b4',
+        '#ffeecd',
+        '#fff6e6']
 
     data = go.Bar(
             x=df['count'],
@@ -153,7 +153,14 @@ def create_lang_bar_chart(df):
 
     fig = go.Figure({'data': data, 'layout': layout})
     fig.update_layout(
-        yaxis={'categoryorder': 'total ascending'})
+        yaxis={'categoryorder': 'total ascending'},
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(
+            family="Courier New, monospace",
+            size=18,
+            color="white")
+        )
     return fig
 
 
@@ -169,21 +176,21 @@ def create_box_chart(df):
             y=df['len_body'],
             quartilemethod="linear",
             name="Bodies",
-            marker_color='#007aff'
+            marker_color='#ffac05'
             )
 
     data_2 = go.Box(
             y=df['len_description'],
             quartilemethod="linear",
             name="Descriptions",
-            marker_color='#49a0ff'
+            marker_color='#ffc450'
             )
 
     data_3 = go.Box(
             y=df['len_title'],
             quartilemethod="linear",
             name="Titles",
-            marker_color='#92c6ff'
+            marker_color='#ffdd9b'
             )
 
     layout = go.Layout(
@@ -203,6 +210,14 @@ def create_box_chart(df):
                     showgrid=False))
 
     fig = go.Figure({'data': [data_1, data_2, data_3], 'layout': layout})
+    fig.update_layout(
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(
+            family="Courier New, monospace",
+            size=18,
+            color="white")
+        )
     return fig
 
 
@@ -246,7 +261,7 @@ def gen_layout_textual(df):
                     html.Div([
                         html.Div([
                             html.H1(
-                                'Languages Present in the Articles',
+                                'Languages of the Week',
                                 className="chart-title"
                                 ),
                             dcc.Graph(
@@ -261,7 +276,7 @@ def gen_layout_textual(df):
                     html.Div([
                         html.Div([
                             html.H1(
-                                'Textual Lengths of the Articles',
+                                'Textual Lengths',
                                 className="chart-title"
                                 ),
                             dcc.Graph(
@@ -276,7 +291,7 @@ def gen_layout_textual(df):
                     html.Div([
                         html.Div([
                             html.H1(
-                                'Most Common Words in Titles',
+                                'Titles Wordcloud',
                                 className="chart-title"
                                 ),
                             html.Img(
@@ -287,7 +302,7 @@ def gen_layout_textual(df):
                     html.Div([
                         html.Div([
                             html.H1(
-                                'Most Common Words in Descriptions',
+                                'Descriptions Wordcloud',
                                 className="chart-title"
                                 ),
                             html.Img(

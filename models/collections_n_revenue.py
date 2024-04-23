@@ -1,6 +1,7 @@
 """ Script to launch the charts about collections and revenue """
 import plotly.graph_objects as go
 from dash import html, dcc
+import pandas as pd
 
 
 def gen_df_sort_collections(df):
@@ -58,7 +59,15 @@ def create_collections_authors_figure(df):
                     showgrid=False))
 
     fig = go.Figure({'data': data, 'layout': layout})
-    fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+    fig.update_layout(
+        yaxis={'categoryorder': 'total ascending'},
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(
+            family="Courier New, monospace",
+            size=18,
+            color="white")
+        )
     return fig
 
 
@@ -107,7 +116,15 @@ def create_collections_entries_figure(df):
                     showgrid=False))
 
     fig = go.Figure({'data': data, 'layout': layout})
-    fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+    fig.update_layout(
+        yaxis={'categoryorder': 'total ascending'},
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(
+            family="Courier New, monospace",
+            size=18,
+            color="white")
+        )
 
     return fig
 
@@ -153,7 +170,16 @@ def create_revenue_authors_figure(df):
                     showgrid=False))
 
     fig = go.Figure({'data': data, 'layout': layout})
-    fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+    fig.update_layout(
+        yaxis={'categoryorder': 'total ascending'},
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(
+            family="Courier New, monospace",
+            size=18,
+            color="white")
+        )
+
     return fig
 
 
@@ -203,7 +229,15 @@ def create_revenue_entries_figure(df):
                     showgrid=False))
 
     fig = go.Figure({'data': data, 'layout': layout})
-    fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+    fig.update_layout(
+        yaxis={'categoryorder': 'total ascending'},
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(
+            family="Courier New, monospace",
+            size=18,
+            color="white")
+        )
 
     return fig
 
@@ -227,15 +261,23 @@ def create_pie_networks(df):
         legend_title_text='Networks')
 
     colors_traces = [
-        '#007aff',
-        '#2e92ff',
-        '#5daaff',
-        '#8bc3ff',
-        '#b9dbff',
-        '#e8f3ff']
+        '#ffac05',
+        '#ffbc36',
+        '#ffcd69',
+        '#ffdd9b',
+        '#ffeecd',
+        '#ffffff']
 
     fig = go.Figure({'data': data, 'layout': layout})
     fig.update_traces(marker={'colors': colors_traces})
+    fig.update_layout(
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(
+            family="Courier New, monospace",
+            size=18,
+            color="white")
+        )
     return fig
 
 
@@ -257,7 +299,7 @@ def gen_table(df):
                 html.A(
                     v['title'], href=v['link'],
                     target='_blank',
-                    style={'color': 'rgba(0, 123, 255, 0.7)'}))
+                    style={'color': 'white'}))
         ])
 
         rows.append(row)
@@ -274,6 +316,12 @@ def gen_layout_col_rev(df):
 
     df_collected = gen_df_sort_collections(df)
     df_revenue = gen_df_sort_revenue(df)
+
+    # Convert the string dates to datetime objects
+    df['date'] = pd.to_datetime(df['date'])
+
+    # Format the datetime objects as strings in the desired format
+    df['date'] = df['date'].dt.strftime('%d-%m-%y')
 
     layout = dcc.Loading([
                 html.Div([

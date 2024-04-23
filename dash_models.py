@@ -18,6 +18,7 @@ from models.collections_n_revenue import create_revenue_authors_figure
 from models.collections_n_revenue import create_revenue_entries_figure
 from models.collections_n_revenue import gen_table
 from models.textual_analysis import gen_layout_textual
+from models.explorer import gen_layout_explorer, gen_table_explorer
 
 # VARIABLES
 df = pd.DataFrame()
@@ -28,12 +29,6 @@ external_stylesheets = [
     "https://fonts.googleapis.com"
     "/css2?family=Bayon&family=Gruppo&family=Poppins:wght@300&display=swap",
     dbc.themes.BOOTSTRAP
-]
-
-# list of available models
-models = [
-    "Collections and Revenue",
-    "Textual Analysis"
 ]
 
 
@@ -83,7 +78,11 @@ def dash_app_models(flask_app, path):
                         ),
                         dcc.Dropdown(
                             id='models-dropdown',
-                            options=models,
+                            options=[
+                                'Explorer',
+                                "Collections & Revenue",
+                                'Textual Analysis'
+                                ],
                             className="dropdown-models"
                         ),
                     ], className="upload-container"),
@@ -121,10 +120,13 @@ def dash_app_models(flask_app, path):
             if 'json' in uploaded_filename:
                 global df
                 df = pd.read_json(io.StringIO(decoded.decode('utf-8')))
-                if selected_model == "Collections and Revenue":
-                    return gen_layout_col_rev(df)
-                if selected_model == "Textual Analysis":
-                    return gen_layout_textual(df)
+                models = {
+                    'Explorer': gen_layout_explorer(df),
+                    "Collections & Revenue": gen_layout_col_rev(df),
+                    "Textual Analysis": gen_layout_textual(df)
+                }
+
+                return models[selected_model]
 
     @app.callback(
         [
@@ -160,5 +162,22 @@ def dash_app_models(flask_app, path):
             gen_table(filt_df_collected),
             gen_table(filt_df_revenue),
             ]
+
+    @app.callback(
+        [
+            Output('table-tags', 'children'),
+        ],
+        Input('tags-dropdown-explorer', 'value')
+    )
+    def update_articles_explorer(selected_tags):
+        """ This function updates the table in the explorer to showcase the
+        articles according to the selected tag/tags"""
+        global df
+
+        # Filter the DataFrame to select only the rows containing the tags
+        filtered_df = df[df['tags'].apply(
+            lambda x: any(tag in x for tag in selected_tags))]
+
+        return [gen_table_explorer(gen_df_sort_collections(filtered_df))]
 
     return app.server
