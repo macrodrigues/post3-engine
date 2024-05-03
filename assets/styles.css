@@ -122,7 +122,7 @@ h1.engine-title {
     text-align: center;
     margin: auto;
     margin-top: 3%;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'MyWebFont';
     font-weight: 600;
     font-size: 20px;
     color: rgb(255, 255, 255);
@@ -237,4 +237,22 @@ p {
 #dynamic-layout {
   background-color: rgba(255, 255, 255, 0);
   margin: 5%;
+}
+
+.button-explorer-table {
+  margin-top: 3%;
+  width: 300px;
+  background-color: rgb(0, 51, 106);
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.165);
+  border-radius: -5%;
+
+}
+
+.tags-search-title {
+  text-align: center;
+  margin: auto;
+  color: rgb(255, 255, 255);
+  font-family: 'MyWebFont';
+  padding-top: 1%;
+  font-size: 35px;
 }

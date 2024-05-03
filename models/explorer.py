@@ -1,5 +1,6 @@
 """ Script to launch the explorer search engine """
 from dash import html, dcc
+import dash_bootstrap_components as dbc
 
 
 def gen_df_sort_collections(df):
@@ -11,23 +12,36 @@ def gen_df_sort_collections(df):
 
 def gen_table_explorer(df):
     """ Generate table with the entries and hyperlinks"""
+
     categories_dict = {
-        i+1: {'title': title, 'link': link}
-        for i, (title, link)
+        i+1: {'title': title,
+              'link': link,
+              'author': author,
+              'author_link': author_link}
+        for i, (title, link, author, author_link)
         in enumerate(zip(
-            df.head(30).title.values, df.head(30).link.values))}
+            df.head(30).title.values,
+            df.head(30).link.values,
+            df.head(30).author.values,
+            df.head(30).author_link.values))}
 
     rows = []
     for k, v in categories_dict.items():
         row = html.Tr([
-            html.Td(
-                str(k) + ": ",
-                style={'color': 'rgba(255, 172, 5, 1.00)'}),
-            html.Td(
-                html.A(
-                    v['title'], href=v['link'],
-                    target='_blank',
-                    style={'color': 'white'}))
+            dbc.Button([
+                html.Td(
+                    html.P(
+                        v['title'],
+                        style={'color': 'white'}),
+                    style={'text-align': 'left', 'width': '200px'}),
+                html.Td(
+                    children=v['author'],
+                    style={
+                        'color': 'rgba(255, 172, 5, 1.00)',
+                        'text-align': 'right'})],
+                href=v['link'],
+                target='_blank',
+                className='button-explorer-table')
         ])
 
         rows.append(row)
@@ -58,6 +72,9 @@ def gen_layout_explorer(df):
     layout = dcc.Loading([
                 html.Div([
                     html.Div([
+                        html.P(
+                            'Select one or more tags',
+                            className='tags-search-title'),
                         dcc.Dropdown(
                             id='tags-dropdown-explorer',
                             multi=True,
